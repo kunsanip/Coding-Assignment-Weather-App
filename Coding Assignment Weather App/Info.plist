@@ -34,6 +34,33 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>http://api.openweathermap.org/data/2.5/weather?id=4163971,,&amp;units=metric&amp;APPID=04ce859d9a8b9bdffe4cb50cf94b2633</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>http://api.openweathermap.org/data/2.5/weather?id=2147714,,&amp;units=metric&amp;APPID=04ce859d9a8b9bdffe4cb50cf94b2633 - 2</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>http://api.openweathermap.org/data/2.5/weather?id=2174003,&amp;units=metric&amp;APPID=04ce859d9a8b9bdffe4cb50cf94b2633 - 3</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
