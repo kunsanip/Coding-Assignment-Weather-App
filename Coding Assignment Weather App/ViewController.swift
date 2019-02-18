@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var cityTemp = [String]()
     var cityPressure = [String]()
+    var cityHumidity = [String]()
     @IBOutlet weak var messageLabel: UILabel!
     let cities = ["Sydney","Brisbane","Melbourne"]
     
@@ -43,7 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let arrayObject = UserDefaults.standard.object(forKey: "Temperature")
 
-      if let array = arrayObject as? NSArray{
+        if let array = arrayObject as? NSArray{
             let avgtemp = (array[indexPath.row]) as! String
             cell.avgTemp.text! = avgtemp as! String + "°"
             
@@ -66,22 +67,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var pressure = ""
+        var humidity = ""
         
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
         vc?.citytext = cities[indexPath.row]
         
-        let arrayObject = UserDefaults.standard.object(forKey: "Temperature")
-        if let array = arrayObject as? NSArray{
+        let arrayObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
+        if let array = arrayObjectTemperature as? NSArray{
             let avgtemp = (array[indexPath.row]) as! String
-            vc?.temperature = avgtemp as! String + "°"
+             print(array)
+            vc?.temperature = avgtemp + "°"
+            
             
         }
-        /*if let array = arrayObject as? NSArray{
-            let pressure = (array[indexPath.row]) as! String
-            vc?.pressure = pressure as! String + "°"
+        
+        //Pressure
+        let arrayObjectPressure = UserDefaults.standard.object(forKey: "Pressure")
+        if let array = arrayObjectPressure as? NSArray{
+             pressure = (array[indexPath.row]) as! String
+         
+        }
+        //humidity
+        let arrayObjectHumidity = UserDefaults.standard.object(forKey: "Humidity")
+        if let array = arrayObjectHumidity as? NSArray{
+            humidity = (array[indexPath.row]) as! String
             
-        }*/
+        }
+        vc?.pressure = pressure
+        vc?.humidity = humidity
         self.present(vc!, animated: true, completion: nil)
         
 
@@ -116,17 +131,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                              
                                 
                             }
-                            /*if let main = (jsonResult["main"] as? NSDictionary){
+                            //pressure
+                          if let main = (jsonResult["main"] as? NSDictionary){
                                 
                                 let pressure = String(describing: main["pressure"] as! NSNumber)
                                 
                                 self.cityPressure.append(pressure)
+                            print(self.cityPressure)
 
                                 UserDefaults.standard.set(self.cityPressure, forKey: "Pressure")
                                 
                                 
-                            }*/
+                            }
                             
+                            //humidity
+                            if let main = (jsonResult["main"] as? NSDictionary){
+                                
+                                let pressure = String(describing: main["humidity"] as! NSNumber)
+                                
+                                self.cityHumidity.append(pressure)
+                                print(self.cityPressure)
+                                
+                                UserDefaults.standard.set(self.cityHumidity, forKey: "Humidity")
+                                
+                                
+                            }
                             
                         } catch {
                             

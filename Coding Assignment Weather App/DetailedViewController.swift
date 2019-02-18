@@ -18,7 +18,7 @@ class DetailedViewController: UIViewController {
     humidity = "",
     sunrise = "",
     sunset = "",
-    pressure = "",
+    pressure = "Pressure",
     tempMin = "",
     tempMax = "",
     visibility = "",
@@ -27,6 +27,7 @@ class DetailedViewController: UIViewController {
     cloudDegree = "",
     weatherDescription = ""
     
+    @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
 
     @IBOutlet weak var pressureLabel: UILabel!
@@ -43,6 +44,7 @@ class DetailedViewController: UIViewController {
         city.text = citytext
         averageTemp.text = temperature
         pressureLabel.text = pressure
+        humidityLabel.text = humidity
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
      
