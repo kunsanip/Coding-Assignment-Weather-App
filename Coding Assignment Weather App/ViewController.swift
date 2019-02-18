@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var cityTemp = [String]()
     var cityPressure = [String]()
     var cityHumidity = [String]()
+    var cityVisibility = [String]()
     @IBOutlet weak var messageLabel: UILabel!
     let cities = ["Sydney","Brisbane","Melbourne"]
     
@@ -69,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var pressure = ""
         var humidity = ""
-        
+        var visibility = ""
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
         vc?.citytext = cities[indexPath.row]
@@ -77,7 +78,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let arrayObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
         if let array = arrayObjectTemperature as? NSArray{
             let avgtemp = (array[indexPath.row]) as! String
-             print(array)
             vc?.temperature = avgtemp + "°"
             
             
@@ -95,8 +95,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             humidity = (array[indexPath.row]) as! String
             
         }
+        //visibility
+        
+        
+        let arrayObjectVisibility = UserDefaults.standard.object(forKey: "Visibility")
+        if let array = arrayObjectVisibility as? NSArray{
+            visibility = (array[indexPath.row]) as! String
+            print(visibility)
+        }
         vc?.pressure = pressure
         vc?.humidity = humidity
+        vc?.visibility = visibility
         self.present(vc!, animated: true, completion: nil)
         
 
@@ -137,7 +146,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 let pressure = String(describing: main["pressure"] as! NSNumber)
                                 
                                 self.cityPressure.append(pressure)
-                            print(self.cityPressure)
+                           
 
                                 UserDefaults.standard.set(self.cityPressure, forKey: "Pressure")
                                 
@@ -147,12 +156,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             //humidity
                             if let main = (jsonResult["main"] as? NSDictionary){
                                 
-                                let pressure = String(describing: main["humidity"] as! NSNumber)
+                                let humidity = String(describing: main["humidity"] as! NSNumber)
                                 
-                                self.cityHumidity.append(pressure)
-                                print(self.cityPressure)
+                                self.cityHumidity.append(humidity)
                                 
                                 UserDefaults.standard.set(self.cityHumidity, forKey: "Humidity")
+                                
+                                
+                            }
+                            //visibility
+                            if let main = (jsonResult["visibility"] as? NSNumber){
+                                
+                                let visibility = String(describing: main)
+                                self.cityVisibility.append(visibility)
+                                
+                                UserDefaults.standard.set(self.cityVisibility, forKey: "Visibility")
                                 
                                 
                             }
