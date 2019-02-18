@@ -111,6 +111,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
+    
+    
     func retrievingData(citycode:Int){
         if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=\(citycode)&units=metric&APPID=04ce859d9a8b9bdffe4cb50cf94b2633"){
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in //
@@ -141,21 +143,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                             }
                             //pressure
-                          if let main = (jsonResult["main"] as? NSDictionary){
+                            if let main = (jsonResult["main"] as? NSDictionary){
                                 
                                 let pressure = String(describing: main["pressure"] as! NSNumber)
                                 
                                 self.cityPressure.append(pressure)
-                           
-
                                 UserDefaults.standard.set(self.cityPressure, forKey: "Pressure")
                                 
-                                
-                            }
-                            
-                            //humidity
-                            if let main = (jsonResult["main"] as? NSDictionary){
-                                
+                                //humidity
                                 let humidity = String(describing: main["humidity"] as! NSNumber)
                                 
                                 self.cityHumidity.append(humidity)
@@ -164,6 +159,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                                 
                             }
+                            
+                            
                             //visibility
                             if let main = (jsonResult["visibility"] as? NSNumber){
                                 
@@ -174,6 +171,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                                 
                             }
+                            
                             
                         } catch {
                             
