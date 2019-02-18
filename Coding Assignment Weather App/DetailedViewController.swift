@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailedViewController: UIViewController {
-
+    
     
     var timer = Timer()
     var i = 1
@@ -36,7 +36,7 @@ class DetailedViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
-
+    
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var city: UILabel!
     
@@ -53,9 +53,14 @@ class DetailedViewController: UIViewController {
         pressureLabel.text = pressure
         humidityLabel.text = humidity
         visibilityLabel.text = visibility
+        tempMinLabel.text = tempMin
+        tempMaxLabel.text = tempMax
+        sunriseLabel.text = sunrise
+        sunsetLabel.text = sunset
+        
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
-     
+        
         
     }
     
@@ -88,6 +93,6 @@ class DetailedViewController: UIViewController {
         
         
     }
-   
+    
     
 }
