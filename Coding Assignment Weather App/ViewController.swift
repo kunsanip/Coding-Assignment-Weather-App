@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var weatherReport = [String]()
+    var cityTemp = [String]()
+    var cityPressure = [String]()
     @IBOutlet weak var messageLabel: UILabel!
     let cities = ["Sydney","Brisbane","Melbourne"]
     
@@ -38,18 +39,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         //        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let arrayObject = UserDefaults.standard.object(forKey: "Data")
         cell.city.text! = cities[indexPath.row]
-        if let array = arrayObject as? NSArray{
-            
+        
+        let arrayObject = UserDefaults.standard.object(forKey: "Temperature")
+
+      if let array = arrayObject as? NSArray{
             let avgtemp = (array[indexPath.row]) as! String
-            cell.avgTemp.text! = avgtemp as! String
+            cell.avgTemp.text! = avgtemp as! String + "°"
             
             
             
         }
         
-        
+    
         
         return cell
         
@@ -68,6 +70,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
         vc?.citytext = cities[indexPath.row]
+        
+        let arrayObject = UserDefaults.standard.object(forKey: "Temperature")
+        if let array = arrayObject as? NSArray{
+            let avgtemp = (array[indexPath.row]) as! String
+            vc?.temperature = avgtemp as! String + "°"
+            
+        }
+        /*if let array = arrayObject as? NSArray{
+            let pressure = (array[indexPath.row]) as! String
+            vc?.pressure = pressure as! String + "°"
+            
+        }*/
         self.present(vc!, animated: true, completion: nil)
         
 
@@ -86,25 +100,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if let urlContent = data {
                         
                         do {
-                            
-                            let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject // Added "as anyObject" to fix syntax error in Xcode 8 Beta 6
-                            
-                            print(jsonResult)
-                            
-                            print(jsonResult["name"])
-                            
-                            if let temperature = (jsonResult["main"] as? NSDictionary){
+                            let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                        
+                            /*if let name = (jsonResult["name"] as? String){
+                                self.weatherReport.append(name)
+                                UserDefaults.standard.set(name, forKey: name)
+
+                            }*/
+                            if let main = (jsonResult["main"] as? NSDictionary){
                                 
-                                let display_temp = String(describing: temperature["temp"] as! NSNumber)
-                                self.weatherReport.append(display_temp)
+                                let temperature = String(describing: main["temp"] as! NSNumber)
+                                self.cityTemp.append(temperature)
                                 
-                                UserDefaults.standard.set(display_temp, forKey: "Data")
-                                DispatchQueue.main.sync(execute: {
-                                    
-                                    UserDefaults.standard.set(self.weatherReport, forKey: "Data")
-                                })
+                                UserDefaults.standard.set(self.cityTemp, forKey: "Temperature")
+                             
                                 
                             }
+                            /*if let main = (jsonResult["main"] as? NSDictionary){
+                                
+                                let pressure = String(describing: main["pressure"] as! NSNumber)
+                                
+                                self.cityPressure.append(pressure)
+
+                                UserDefaults.standard.set(self.cityPressure, forKey: "Pressure")
+                                
+                                
+                            }*/
                             
                             
                         } catch {

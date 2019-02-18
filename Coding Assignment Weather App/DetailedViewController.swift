@@ -9,23 +9,75 @@
 import UIKit
 
 class DetailedViewController: UIViewController {
-    var citytext = ""
+
+    
+    var timer = Timer()
+    var i = 1
+    var citytext = "",
+    temperature = "",
+    humidity = "",
+    sunrise = "",
+    sunset = "",
+    pressure = "",
+    tempMin = "",
+    tempMax = "",
+    visibility = "",
+    windSpeed = "",
+    windDegree = "",
+    cloudDegree = "",
+    weatherDescription = ""
+    
+    @IBOutlet weak var image: UIImageView!
+
+    @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var city: UILabel!
+    
+    @IBOutlet weak var weatherCondition: UILabel!
+    
+    @IBOutlet weak var averageTemp: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         city.text = citytext
-        // Do any additional setup after loading the view.
+        averageTemp.text = temperature
+        pressureLabel.text = pressure
+        //screen animation
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
+     
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func processTimer(){
+        
+        
+        //frame_001_delay-0.07s
+        image.image = UIImage(named: "frame_00\(i)_delay-0.07s.gif")
+        if i<10{
+            
+            image.image = UIImage(named: "frame_00\(i)_delay-0.07s.gif")
+        }
+            
+        else if i<100{
+            image.image = UIImage(named: "frame_0\(i)_delay-0.07s.gif")
+            
+            
+            
+        }
+        else{
+            image.image = UIImage(named: "frame_\(i)_delay-0.07s.gif")
+            
+            
+        }
+        i += 1
+        
+        if i == 47{
+            i = 1
+        }
+        
+        
     }
-    */
-
+   
+    
 }
