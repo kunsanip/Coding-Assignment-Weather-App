@@ -35,7 +35,9 @@ class DetailedViewController: UIViewController {
     @IBOutlet weak var visibilityLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var windDegreeLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var cloudLabel: UILabel!
     
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var city: UILabel!
@@ -57,6 +59,8 @@ class DetailedViewController: UIViewController {
         tempMaxLabel.text = tempMax
         sunriseLabel.text = sunrise
         sunsetLabel.text = sunset
+        windSpeedLabel.text = windSpeed
+       windDegreeLabel.text = windDegree
         
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)

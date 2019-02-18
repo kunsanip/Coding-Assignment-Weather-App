@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GFZ-YX-MSr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="137"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="136.66666666666666"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lO9-Lp-wju">
                                                     <rect key="frame" x="301" y="11.000000000000007" width="93" height="114.66666666666669"/>
@@ -97,7 +97,6 @@
         <!--DetailedViewController-->
         <scene sceneID="x9D-yR-Ihf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1T-dE-6yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DetailedViewController" title="DetailedViewController" id="DtL-gH-z9f" customClass="DetailedViewController" customModule="Coding_Assignment_Weather_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2k4-qX-H8f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -252,6 +251,7 @@
                     <connections>
                         <outlet property="averageTemp" destination="85w-ag-013" id="tqm-9i-fKg"/>
                         <outlet property="city" destination="AeK-9B-mYV" id="c1s-Oc-RJf"/>
+                        <outlet property="cloudLabel" destination="YPH-Yz-Ox5" id="8E2-wG-AaW"/>
                         <outlet property="humidityLabel" destination="oTb-5k-pJE" id="5nL-Vs-uvf"/>
                         <outlet property="image" destination="3l9-UB-QVM" id="fIO-k6-51u"/>
                         <outlet property="pressureLabel" destination="lda-yH-a0M" id="mQt-dN-S6h"/>
@@ -261,9 +261,11 @@
                         <outlet property="tempMinLabel" destination="1me-cF-yqm" id="iH3-5J-LGo"/>
                         <outlet property="visibilityLabel" destination="dmS-Xz-6w5" id="Zlf-D1-Ngi"/>
                         <outlet property="weatherCondition" destination="Dp2-5H-c8v" id="IHb-Rw-p2a"/>
+                        <outlet property="windDegreeLabel" destination="GVW-TX-80V" id="SPh-w7-dkw"/>
                         <outlet property="windSpeedLabel" destination="J9o-8u-Yuw" id="ia4-at-sgf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1T-dE-6yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1842.0289855072465" y="139.28571428571428"/>
         </scene>

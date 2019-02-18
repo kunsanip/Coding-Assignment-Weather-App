@@ -150,14 +150,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let array = arrayObjectWindSpeed as? NSArray{
             
             windSpeed = (array[indexPath.row]) as! String
-            
+            print(windSpeed)
         }
         
         let arrayObjectWindDegree = UserDefaults.standard.object(forKey: "WindDegree")
         if let array = arrayObjectWindDegree as? NSArray{
             
             windDegree = (array[indexPath.row]) as! String
-            
+            print(windDegree)
         }
         
         
@@ -168,8 +168,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc?.tempMax = maximumTemp
         vc?.sunrise = sunrise
         vc?.sunset = sunset
-        // vc?.windDegree = windDegree
-        //vc?.windSpeed = windSpeed
+        vc?.windDegree = windDegree
+        vc?.windSpeed = windSpeed
         
         self.present(vc!, animated: true, completion: nil)
         
