@@ -8,8 +8,10 @@
 
 import UIKit
 
-class DetailedViewController: UIViewController {
+class DetailedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     
+    @IBOutlet weak var table: UITableView!
     
     var timer = Timer()
     var i = 1
@@ -26,44 +28,34 @@ class DetailedViewController: UIViewController {
     windDegree = "",
     cloud = "",
     weatherDescription = ""
+   
     
-    @IBOutlet weak var sunsetLabel: UILabel!
-    @IBOutlet weak var sunriseLabel: UILabel!
-    
-    @IBOutlet weak var tempMinLabel: UILabel!
-    @IBOutlet weak var tempMaxLabel: UILabel!
-    @IBOutlet weak var visibilityLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windSpeedLabel: UILabel!
-    @IBOutlet weak var windDegreeLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var cloudLabel: UILabel!
     
-    @IBOutlet weak var pressureLabel: UILabel!
+   
     @IBOutlet weak var city: UILabel!
     
     @IBOutlet weak var weatherCondition: UILabel!
     
     @IBOutlet weak var averageTemp: UILabel!
     
+      let header = ["Pressure", "Humidity", "Visibility", "Sunrise", "Sunset","Wind Speed", "Wind Degree", "Cloud"]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
         
-        city.text = citytext
-        averageTemp.text = temperature
-        pressureLabel.text = pressure
-        humidityLabel.text = humidity
-        visibilityLabel.text = visibility
-        tempMinLabel.text = tempMin
-        tempMaxLabel.text = tempMax
-        sunriseLabel.text = sunrise
-        sunsetLabel.text = sunset
-        windSpeedLabel.text = windSpeed
-       windDegreeLabel.text = windDegree
-        cloudLabel.text = cloud
+        
+        
+       city.text = citytext
+        weatherCondition.text = weatherDescription
+        averageTemp.text = temperature + "C"
+        
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         
     }
@@ -97,6 +89,46 @@ class DetailedViewController: UIViewController {
         
         
     }
+    
+    
+    func timeStampConvert(timeStamp:Int) -> String{
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "HH:mm" //Specify your format that you want
+        return dateFormatter.string(from: date)
+        
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return header.count
+        
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+        
+    {
+        //        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! DetailedVCTableViewCell
+        
+        var data = [pressure + "hPA", humidity + "%", visibility + "km", timeStampConvert(timeStamp: Int(sunrise)!), timeStampConvert(timeStamp: Int(sunset)!), windSpeed + "m/s", windDegree + "°", cloud + "%"]
+        cell.header.text! = header[indexPath.row]
+        print(indexPath.row)
+        cell.information.text! = data[indexPath.row]// data[indexPath.row]
+        
+        return cell
+        
+        
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90 //putting up to 90
+    }
+    
     
     
 }

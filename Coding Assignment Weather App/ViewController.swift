@@ -190,6 +190,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc?.windDegree = windDegree
         vc?.windSpeed = windSpeed
         vc?.cloud = cloud
+        vc?.weatherDescription = weatherDescription
         
         self.present(vc!, animated: true, completion: nil)
         

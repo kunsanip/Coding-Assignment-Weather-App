@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D217D162221AF411009EAA67 /* DetailedVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D217D161221AF411009EAA67 /* DetailedVCTableViewCell.swift */; };
 		D2458C112211074D00661394 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2458C102211074D00661394 /* background.jpg */; };
 		D2458C202212FA3300661394 /* WeatherInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2458C1F2212FA3300661394 /* WeatherInformation.swift */; };
 		D2458C22221300F700661394 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2458C21221300F700661394 /* TableViewCell.swift */; };
@@ -219,6 +220,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D217D161221AF411009EAA67 /* DetailedVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVCTableViewCell.swift; sourceTree = "<group>"; };
 		D2458C102211074D00661394 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		D2458C1F2212FA3300661394 /* WeatherInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInformation.swift; sourceTree = "<group>"; };
 		D2458C21221300F700661394 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 				D2458C21221300F700661394 /* TableViewCell.swift */,
 				D2458C1F2212FA3300661394 /* WeatherInformation.swift */,
 				D2883F57221105A000979B0C /* Main.storyboard */,
+				D217D161221AF411009EAA67 /* DetailedVCTableViewCell.swift */,
 				D2883F5D221105A200979B0C /* Assets.xcassets */,
 				D2883F5F221105A200979B0C /* LaunchScreen.storyboard */,
 				D269FC85221AA1A9004AE9D2 /* Pictures */,
@@ -959,6 +962,7 @@
 				D2883F56221105A000979B0C /* ViewController.swift in Sources */,
 				D2B11D552217E34700ED882F /* DetailedViewController.swift in Sources */,
 				D2458C202212FA3300661394 /* WeatherInformation.swift in Sources */,
+				D217D162221AF411009EAA67 /* DetailedVCTableViewCell.swift in Sources */,
 				D2883F54221105A000979B0C /* AppDelegate.swift in Sources */,
 				D2883F5C221105A000979B0C /* Coding_Assignment_Weather_App.xcdatamodeld in Sources */,
 			);
