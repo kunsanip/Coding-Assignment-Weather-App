@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var citySunset = [String]()
     var cityWindSpeed = [String]()
     var cityWindDegree = [String]()
+    var cityCloud = [String]()
+    var cityWeatherDescription = [String]()
     
     @IBOutlet weak var messageLabel: UILabel!
     let cities = ["Sydney","Brisbane","Melbourne"]
@@ -74,7 +76,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        var weatherDescription = ""
         var pressure = ""
         var humidity = ""
         var visibility = ""
@@ -84,7 +86,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var sunset = ""
         var windSpeed = ""
         var windDegree = ""
-        
+        var cloud = ""
+        var weather = ""
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
         vc?.citytext = cities[indexPath.row]
         
@@ -95,6 +98,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             
         }
+        //Weather Description
+        let arrayObjectWeather =  UserDefaults.standard.object(forKey: "WeatherDescription")
+
+        if let array = arrayObjectWeather as? NSArray{
+            weatherDescription = (array[indexPath.row]) as! String
+            
+        }
+        
         
         //Pressure
         let arrayObjectPressure = UserDefaults.standard.object(forKey: "Pressure")
@@ -102,7 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             pressure = (array[indexPath.row]) as! String
             
         }
-        //humidity
+        //Humidity
         let arrayObjectHumidity = UserDefaults.standard.object(forKey: "Humidity")
         if let array = arrayObjectHumidity as? NSArray{
             humidity = (array[indexPath.row]) as! String
@@ -133,7 +144,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let arrayObjectSunrise = UserDefaults.standard.object(forKey: "Sunrise")
         if let array = arrayObjectSunrise as? NSArray{
             sunrise = (array[indexPath.row]) as! String
-            print(sunrise)
+          
         }
         
         //sunset
@@ -141,7 +152,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let arrayObjectSunset = UserDefaults.standard.object(forKey: "Sunset")
         if let array = arrayObjectSunset as? NSArray{
             sunset = (array[indexPath.row]) as! String
-            print(sunset)
+         
         }
         
         
@@ -150,16 +161,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let array = arrayObjectWindSpeed as? NSArray{
             
             windSpeed = (array[indexPath.row]) as! String
-            print(windSpeed)
+   
         }
         
         let arrayObjectWindDegree = UserDefaults.standard.object(forKey: "WindDegree")
         if let array = arrayObjectWindDegree as? NSArray{
             
             windDegree = (array[indexPath.row]) as! String
-            print(windDegree)
+            
         }
         
+        //cloud
+        
+        let arrayObjectCloud = UserDefaults.standard.object(forKey: "Cloud")
+        if let array = arrayObjectCloud as? NSArray{
+            
+            cloud = (array[indexPath.row]) as! String
+            print(cloud)
+        }
         
         vc?.pressure = pressure
         vc?.humidity = humidity
@@ -170,6 +189,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc?.sunset = sunset
         vc?.windDegree = windDegree
         vc?.windSpeed = windSpeed
+        vc?.cloud = cloud
         
         self.present(vc!, animated: true, completion: nil)
         
@@ -273,7 +293,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                             }
                             
-                            /*
+                          
                              //wind
                              if let main = (jsonResult["wind"] as? NSDictionary){
                              //wind Speed
@@ -286,8 +306,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                              self.cityWindDegree.append(windDegree)
                              UserDefaults.standard.set(self.cityWindDegree, forKey: "WindDegree")
                              }
+                            //cloud
+                            if let main = (jsonResult["clouds"] as? NSDictionary){
                              
-                             */
+                                let cloud = String(describing: main["all"] as! NSNumber)
+                                self.cityCloud.append(cloud)
+                                UserDefaults.standard.set(self.cityCloud, forKey: "Cloud")
+                                
+                                
+                            }
+                            
+                            //cloud
+                            if let main = (jsonResult["weather"] as? NSArray){
+                                
+                                let weather = String(describing: (main[0] as! NSDictionary)["description"] as! NSString )
+                                self.cityWeatherDescription.append(weather)
+                                UserDefaults.standard.set(self.cityWeatherDescription, forKey: "WeatherDescription")
+                                
+                                
+                            }
+                           
                             
                         } catch {
                             

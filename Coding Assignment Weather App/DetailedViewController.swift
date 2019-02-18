@@ -24,7 +24,7 @@ class DetailedViewController: UIViewController {
     visibility = "",
     windSpeed = "",
     windDegree = "",
-    cloudDegree = "",
+    cloud = "",
     weatherDescription = ""
     
     @IBOutlet weak var sunsetLabel: UILabel!
@@ -61,7 +61,7 @@ class DetailedViewController: UIViewController {
         sunsetLabel.text = sunset
         windSpeedLabel.text = windSpeed
        windDegreeLabel.text = windDegree
-        
+        cloudLabel.text = cloud
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
         
