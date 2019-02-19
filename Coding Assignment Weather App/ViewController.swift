@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var cityTemp = [String]()
@@ -31,11 +31,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         /*  let sydneycode = 4163971
          let melbournecode = 2147714
          let brisbanecode = 2174003*/
-        
-        retrievingData(citycode: 4163971)
-        retrievingData(citycode: 2147714)
-        retrievingData(citycode: 2174003)
-        
+        Loading(string: "Loading..")
+        DispatchQueue.global(qos: .background).async {
+        self.retrievingData(citycode: 4163971)
+        self.retrievingData(citycode: 2147714)
+        self.retrievingData(citycode: 2174003)
+        SVProgressHUD.dismiss()
+        }
     }
     
     
@@ -200,6 +202,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func retrievingData(citycode:Int){
+        
+        
+        
         if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=\(citycode)&units=metric&APPID=04ce859d9a8b9bdffe4cb50cf94b2633"){
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in //
                 
@@ -210,6 +215,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 } else {
                     
                     if let urlContent = data {
+                        
                         
                         do {
                             let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
@@ -328,13 +334,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                                 
                             }
+                            
                            
                             
                         } catch {
-                            
                             print("JSON Processing Failed")
                             
-                        }
+                            }
                     }
                     
                 }
