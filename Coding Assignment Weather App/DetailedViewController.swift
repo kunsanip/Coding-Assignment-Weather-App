@@ -43,7 +43,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var averageTemp: UILabel!
     
-      let header = ["Pressure", "Humidity", "Visibility", "Sunrise", "Sunset","Wind Speed", "Wind Degree", "Cloud"]
+      let header = ["Pressure", "Humidity", "Visibility", "Sunrise", "Sunset","Wind Speed", "Wind Degree", "Cloud",""]
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -138,7 +138,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         //        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! DetailedVCTableViewCell
         
-        var data = [pressure + "hPA", humidity + "%", visibility + "km", timeStampConvert(timeStamp: Int(sunrise)!), timeStampConvert(timeStamp: Int(sunset)!), windSpeed + "m/s", windDegree + "°", cloud + "%"]
+        var data = [pressure + "hPA", humidity + "%", visibility + "km", timeStampConvert(timeStamp: Int(sunrise)!), timeStampConvert(timeStamp: Int(sunset)!), windSpeed + "m/s", windDegree + "°", cloud + "%", ""]
         cell.header.text! = header[indexPath.row]
         print(indexPath.row)
         cell.information.text! = data[indexPath.row]// data[indexPath.row]
