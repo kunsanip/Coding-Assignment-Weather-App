@@ -72,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90 //putting up to 90
+        return 130 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -317,10 +317,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                             }
                             
-                            //cloud
+                            //weatherDescription
                             if let main = (jsonResult["weather"] as? NSArray){
                                 
-                                let weather = String(describing: (main[0] as! NSDictionary)["description"] as! NSString )
+                                var weather = String(describing: (main[0] as! NSDictionary)["description"] as! NSString )
+                                //Capitalizing first letter
+                                weather = weather.prefix(1).uppercased() + weather.lowercased().dropFirst()
                                 self.cityWeatherDescription.append(weather)
                                 UserDefaults.standard.set(self.cityWeatherDescription, forKey: "WeatherDescription")
                                 

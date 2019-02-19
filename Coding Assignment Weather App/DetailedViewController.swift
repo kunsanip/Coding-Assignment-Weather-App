@@ -30,10 +30,13 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
     weatherDescription = ""
    
     
+    @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var cloudLabel: UILabel!
     
-   
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
+    @IBOutlet weak var weatherDescripitionLabel: UILabel!
     @IBOutlet weak var city: UILabel!
     
     @IBOutlet weak var weatherCondition: UILabel!
@@ -46,9 +49,14 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         
-       city.text = citytext
+        city.text = citytext
+        if let today = today(timeStamp: Int(sunrise)!) as? String{
+            todayLabel.text = today
+        }
         weatherCondition.text = weatherDescription
-        averageTemp.text = temperature + "C"
+        averageTemp.text = temperature
+        temperatureLabel.text = "\(tempMax)    \(tempMin)"
+        weatherDescripitionLabel.text = "Today: \(weatherDescription) currently. The high will be \(tempMax)° and a low will be \(tempMin)°."
         
         //screen animation
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailedViewController.processTimer), userInfo: nil, repeats: true)
@@ -64,7 +72,12 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         //frame_001_delay-0.07s
+        if i == 1{
+            image.alpha = 0
+            UIView.animate(withDuration: 1, animations: {self.image.alpha = 1})
+        }
         image.image = UIImage(named: "frame_00\(i)_delay-0.07s.gif")
+        
         if i<10{
             
             image.image = UIImage(named: "frame_00\(i)_delay-0.07s.gif")
@@ -83,9 +96,11 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         }
         i += 1
         
-        if i == 47{
+        if i == 198{
             i = 1
+            UIView.animate(withDuration: 1, animations: {self.image.alpha = 1})
         }
+        
         
         
     }
@@ -99,6 +114,16 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         dateFormatter.dateFormat = "HH:mm" //Specify your format that you want
         return dateFormatter.string(from: date)
         
+    }
+    
+    
+    func today(timeStamp:Int) -> String{
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter.string(from: date)
+        return dayInWeek
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
