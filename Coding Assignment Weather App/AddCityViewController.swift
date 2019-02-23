@@ -103,8 +103,10 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
         let vc = storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController
         let citycode = (cityCodeList[filteredAllCities[indexPath.row]]!)
         print(citycode)
-        //vc?.newCityCode = (cityCodeList[filteredAllCities[indexPath.row]]!)
-        //vc?.newCity = filteredAllCities[indexPath.row]
+        vc?.newCityCode = (cityCodeList[filteredAllCities[indexPath.row]]!)
+     print(filteredAllCities[indexPath.row])
+        vc?.newCity = filteredAllCities[indexPath.row]
+        
         self.present(vc!, animated: true, completion: nil)
         
     }
