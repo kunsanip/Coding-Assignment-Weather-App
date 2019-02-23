@@ -9,27 +9,29 @@
 import UIKit
 import SVProgressHUD
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    //Intialising Variables
     var newCityCode:String = ""
     var newCity:String = ""
-  
-    
-    
+    var cities = ["Sydney","Brisbane","Melbourne"]
     var retrievingData: RetrievingData = RetrievingData()
+    var networkLoading: NetworkLoading = NetworkLoading()
+    //IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
-    var cities = ["Sydney","Brisbane","Melbourne"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         /*  let sydneycode = 4163971
          let melbournecode = 2147714
          let brisbanecode = 2174003*/
-        Loading(string: "Loading..")
+        networkLoading.loading(string: "Loading..")
         DispatchQueue.global(qos: .background).async {
-        self.retrievingData.retrievingData(citycode: 4163971)
-        self.retrievingData.retrievingData(citycode: 2147714)
-        self.retrievingData.retrievingData(citycode: 2174003)
-     
+            self.retrievingData.retrievingData(citycode: 4163971)
+            self.retrievingData.retrievingData(citycode: 2147714)
+            self.retrievingData.retrievingData(citycode: 2174003)
+            
             if self.newCity != "" {
                 print(self.cities)
                 let cityName = String(self.newCity.filter { !" \n\t\r".contains($0) })
@@ -37,8 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print(self.cities)
                 self.retrievingData.retrievingData(citycode: Int(self.newCityCode)!)
             }
-            
-        SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
         }
         
         self.tableView.reloadData()

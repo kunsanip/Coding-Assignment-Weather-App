@@ -14,11 +14,12 @@ import SVProgressHUD
 
 // MARK: - Messages
 
+class NetworkLoading{
 
-
-public func Loading(string: String?, maskType: SVProgressHUDMaskType = SVProgressHUDMaskType.black) {
+public func loading(string: String?, maskType: SVProgressHUDMaskType = SVProgressHUDMaskType.black) {
     SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
     SVProgressHUD.show(withStatus: string  ?? "")
     //SVProgressHUD.show(withStatus: string!, maskType: maskType)
 }
 
+}
