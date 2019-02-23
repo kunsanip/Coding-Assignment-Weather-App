@@ -53,7 +53,7 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90 //putting up to 90
+        return 55
     }
     
  
