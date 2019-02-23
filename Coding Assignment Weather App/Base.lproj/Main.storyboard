@@ -18,14 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a city name" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1de-HN-2bo">
-                                <rect key="frame" x="20" y="108" width="374" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8j7-8x-w1B">
-                                <rect key="frame" x="0.0" y="163" width="414" height="733"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddCityCell" rowHeight="52" id="G5B-0j-icJ" customClass="AddCities" customModule="Coding_Assignment_Weather_App" customModuleProvider="target">
@@ -59,32 +53,39 @@
                                     <outlet property="delegate" destination="bON-TC-7de" id="uYg-mF-6SW"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="DJ6-NH-UN4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bON-TC-7de" id="LIL-um-2kE"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8j7-8x-w1B" firstAttribute="top" secondItem="1de-HN-2bo" secondAttribute="bottom" constant="25" id="D9E-2B-sME"/>
-                            <constraint firstItem="1de-HN-2bo" firstAttribute="leading" secondItem="BaO-2J-3aM" secondAttribute="leading" constant="20" id="Jje-YF-4Kf"/>
-                            <constraint firstItem="8j7-8x-w1B" firstAttribute="leading" secondItem="BaO-2J-3aM" secondAttribute="leading" id="ffS-Z1-mTF"/>
-                            <constraint firstItem="BaO-2J-3aM" firstAttribute="trailing" secondItem="1de-HN-2bo" secondAttribute="trailing" constant="20" id="jzi-1D-5ba"/>
-                            <constraint firstItem="8j7-8x-w1B" firstAttribute="trailing" secondItem="BaO-2J-3aM" secondAttribute="trailing" id="v9Q-zF-V3V"/>
-                            <constraint firstAttribute="bottom" secondItem="8j7-8x-w1B" secondAttribute="bottom" id="vfh-4B-Psq"/>
-                            <constraint firstItem="1de-HN-2bo" firstAttribute="top" secondItem="BaO-2J-3aM" secondAttribute="top" constant="64" id="y58-wH-UST"/>
+                            <constraint firstItem="DJ6-NH-UN4" firstAttribute="leading" secondItem="BaO-2J-3aM" secondAttribute="leading" id="7Aj-IC-muc"/>
+                            <constraint firstItem="8j7-8x-w1B" firstAttribute="leading" secondItem="BaO-2J-3aM" secondAttribute="leading" id="P7S-Rm-zkX"/>
+                            <constraint firstItem="DJ6-NH-UN4" firstAttribute="top" secondItem="BaO-2J-3aM" secondAttribute="top" id="aH4-ri-OWY"/>
+                            <constraint firstItem="DJ6-NH-UN4" firstAttribute="trailing" secondItem="BaO-2J-3aM" secondAttribute="trailing" id="eo9-Ex-Yg0"/>
+                            <constraint firstItem="8j7-8x-w1B" firstAttribute="trailing" secondItem="BaO-2J-3aM" secondAttribute="trailing" id="oRf-WE-gCf"/>
+                            <constraint firstItem="8j7-8x-w1B" firstAttribute="top" secondItem="DJ6-NH-UN4" secondAttribute="bottom" id="rOV-NA-GtR"/>
+                            <constraint firstAttribute="bottom" secondItem="8j7-8x-w1B" secondAttribute="bottom" id="zKG-Qw-wUJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BaO-2J-3aM"/>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="DJ6-NH-UN4" id="dpY-uB-nse"/>
                         <outlet property="tableView" destination="8j7-8x-w1B" id="ao3-Dt-JNw"/>
-                        <outlet property="textField" destination="1de-HN-2bo" id="sRP-cf-Hqh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gsx-Jh-ZbA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1473.913043478261" y="-510.9375"/>
+            <point key="canvasLocation" x="1459" y="770"/>
         </scene>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Coding_Assignment_Weather_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Coding_Assignment_Weather_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +102,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="136.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="A22-f9-1uY">
+                                                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" highlightedImage="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="A22-f9-1uY">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="136.66666666666666"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icM-PJ-9rP">
@@ -350,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1T-dE-6yp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1842.0289855072465" y="139.28571428571428"/>
+            <point key="canvasLocation" x="2165" y="29"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BX1-vG-Iqh">

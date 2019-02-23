@@ -9,7 +9,8 @@
 import UIKit
 import SVProgressHUD
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    var newCityCode:String = ""
+    var newCity:String = ""
     var cityTemp = [String]()
     var cityPressure = [String]()
     var cityHumidity = [String]()
@@ -24,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var cityWeatherDescription = [String]()
     
     @IBOutlet weak var messageLabel: UILabel!
-    let cities = ["Sydney","Brisbane","Melbourne"]
+    var cities = ["Sydney","Brisbane","Melbourne"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.retrievingData(citycode: 4163971)
         self.retrievingData(citycode: 2147714)
         self.retrievingData(citycode: 2174003)
+            if self.newCity != "" {
+                self.cities.append(self.newCity)
+                self.retrievingData(citycode: Int(self.newCityCode)!)
+            }
+
+            
         SVProgressHUD.dismiss()
         }
     }

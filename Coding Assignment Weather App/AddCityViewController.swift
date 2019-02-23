@@ -8,13 +8,17 @@
 import Foundation
 import UIKit
 
-class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
- var array = ["sanip","shrestha","whatever"]
+class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+   
+    
     var cityCodeList = [String:String]()
     var allCities = [String]()
+    var filteredAllCities = [String]()
     var allCodes = [String]()
+    
+    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,28 +30,43 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("reload")
         
         getCityCodes()
-        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
         
         self.allCities = self.getAllcityNames()
-        print("dispatch")
         
         self.tableView.reloadData()
         
     }
 
    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-       tableView.reloadData()
-        
+   
+    
+    
+   //search
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty
+            else{
+                filteredAllCities = allCities
+                tableView.reloadData()
+                return
+                
+        }
+        filteredAllCities = allCities.filter({ (city) -> Bool in
+            guard let text = searchBar.text else {return false}
+            print(city)
+            print(text)
+            return city.lowercased().contains(text.lowercased())
+            
+        })
+       
+        tableView.reloadData()
     }
     
-    
-    
-    
-    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
     
     
     
@@ -60,9 +79,9 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-       print(allCities.count)
+        print("count: \(allCities.count)")
 
-        return allCities.count
+        return filteredAllCities.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -71,12 +90,24 @@ class AddCityViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     
        
-        cell.cityName.text! = (allCities[indexPath.row]) as String
+        cell.cityName.text! = (filteredAllCities[indexPath.row]) as String
         
         return cell
         
     }
-
+    
+    //Work here for latter part 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController
+        let citycode = (cityCodeList[filteredAllCities[indexPath.row]]!)
+        print(citycode)
+        //vc?.newCityCode = (cityCodeList[filteredAllCities[indexPath.row]]!)
+        //vc?.newCity = filteredAllCities[indexPath.row]
+        self.present(vc!, animated: true, completion: nil)
+        
+    }
 
     func getAllcityNames() -> [String]
     {
