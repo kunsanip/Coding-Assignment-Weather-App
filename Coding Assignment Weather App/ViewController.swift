@@ -138,7 +138,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
      
         
-       
+       //Temperature
         let dictObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
         if let dict = dictObjectTemperature as? NSDictionary{
             let avgtemp = (dict.allValues[indexPath.row]) as! String
