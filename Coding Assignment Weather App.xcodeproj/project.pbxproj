@@ -223,7 +223,6 @@
 		D29C46B6222162140046747D /* RetrievingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C46B5222162140046747D /* RetrievingData.swift */; };
 		D29C46B92221647C0046747D /* TimeStampConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C46B82221647C0046747D /* TimeStampConverter.swift */; };
 		D2B11D552217E34700ED882F /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B11D542217E34700ED882F /* DetailedViewController.swift */; };
-		D2CC13762221020100C0DC32 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CC13752221020100C0DC32 /* AddCityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -457,7 +456,6 @@
 		D29C46B5222162140046747D /* RetrievingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievingData.swift; sourceTree = "<group>"; };
 		D29C46B82221647C0046747D /* TimeStampConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStampConverter.swift; sourceTree = "<group>"; };
 		D2B11D542217E34700ED882F /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
-		D2CC13752221020100C0DC32 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,6 +481,7 @@
 		D269FC85221AA1A9004AE9D2 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				D29C46ED222366840046747D /* clouds */,
 				D2458C102211074D00661394 /* background.jpg */,
 				D269FE14221AADAA004AE9D2 /* frame_000_delay-0.07s.gif */,
 				D269FDF3221AAD73004AE9D2 /* frame_001_delay-0.07s.gif */,
@@ -735,7 +734,6 @@
 			isa = PBXGroup;
 			children = (
 				D2883F55221105A000979B0C /* ViewController.swift */,
-				D2CC13752221020100C0DC32 /* AddCityViewController.swift */,
 				D2B11D542217E34700ED882F /* DetailedViewController.swift */,
 				D29C46B122211F990046747D /* Table View Cell  */,
 			);
@@ -750,6 +748,13 @@
 				D217D18A221BB17B009EAA67 /* PDGlobal.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D29C46ED222366840046747D /* clouds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = clouds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1035,7 +1040,6 @@
 				D217D18B221BB17B009EAA67 /* PDGlobal.swift in Sources */,
 				D2883F5C221105A000979B0C /* Coding_Assignment_Weather_App.xcdatamodeld in Sources */,
 				D29C46B6222162140046747D /* RetrievingData.swift in Sources */,
-				D2CC13762221020100C0DC32 /* AddCityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

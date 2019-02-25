@@ -14,7 +14,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
 
    //Initialising Variable
     var timer = Timer()
-    var i = 1
+    var i = 1 //required for func processTimer 
     var citytext = "",
     temperature = "",
     humidity = "",
@@ -67,8 +67,13 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
+    
+    
+    //Animation
     @objc func processTimer(){
-        
+       
+
         
         //frame_001_delay-0.07s
         if i == 1{

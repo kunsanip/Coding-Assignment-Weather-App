@@ -12,36 +12,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //Intialising Variables
-    var newCityCode:String = ""
-    var newCity:String = ""
     var cities = ["Sydney","Brisbane","Melbourne"]
+    var temperature = [String]()
     var retrievingData: RetrievingData = RetrievingData()
     var networkLoading: NetworkLoading = NetworkLoading()
+    
     //IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*  let sydneycode = 4163971
-         let melbournecode = 2147714
-         let brisbanecode = 2174003*/
+    }
+    override func viewDidAppear(_ animated: Bool) {
+      
+        
+        // loading for some feedback to user while waiting for network response
         networkLoading.loading(string: "Loading..")
+        
         DispatchQueue.global(qos: .background).async {
-            self.retrievingData.retrievingData(citycode: 4163971)
-            self.retrievingData.retrievingData(citycode: 2147714)
-            self.retrievingData.retrievingData(citycode: 2174003)
             
-            if self.newCity != "" {
-                print(self.cities)
-                let cityName = String(self.newCity.filter { !" \n\t\r".contains($0) })
-                self.cities.append(cityName)
-                print(self.cities)
-                self.retrievingData.retrievingData(citycode: Int(self.newCityCode)!)
-            }
+            self.retrievingData.retrieveData(citycode: 4163971) //Melbourne
+            self.retrievingData.retrieveData(citycode: 2147714) //Sydney
+            self.retrievingData.retrieveData(citycode: 2174003) //Brisbane
+            
+            
             SVProgressHUD.dismiss()
+            
         }
         
+        //refreshing tableview data
         self.tableView.reloadData()
 
     }
@@ -49,29 +49,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return cities.count
+       return cities.count
         
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
         
     {
-        //        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        cell.city.text! = cities[indexPath.row]
         
-        let arrayObject = UserDefaults.standard.object(forKey: "Temperature")
-        
-        if let array = arrayObject as? NSArray{
-            let avgtemp = (array[indexPath.row]) as! String
-            cell.avgTemp.text! = avgtemp as! String + "°"
+        //Each cell should display two pieces of info
+        let dictObject = UserDefaults.standard.object(forKey: "Temperature")
+
+        //1. Name of the city on the left
+        if let dict = dictObject as? NSDictionary{
+             print(dict)
+            if let city = Array(dict.allKeys)[indexPath.row] as? String{
+                cell.city.text! = city
+                
+            }
             
+        else{
+            cell.city.text! = "city1"
+        }
+        }
+        else{
             
-            
+            cell.city.text! = "city2"
         }
         
+        //2. Temperature on the right
         
-        
+        if let dict = dictObject as? NSDictionary{
+           
+            if let temp = Array(dict.allValues)[indexPath.row] as? String{
+                cell.avgTemp.text! = "\(temp)°"
+                
+            }
+                
+            else{
+                cell.avgTemp.text! = "temp"
+            }
+        }
+        else{
+            
+            cell.avgTemp.text! = "temp"
+        }
         return cell
         
         
@@ -85,6 +109,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     }
     
+    
+    //Expanding information when user tap on a cell to open a new "detail screen",
+    //To show more information
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
@@ -99,99 +126,102 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var windSpeed = ""
         var windDegree = ""
         var cloud = ""
-        var weather = ""
+        
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
         vc?.citytext = cities[indexPath.row]
-        
-        let arrayObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
-        if let array = arrayObjectTemperature as? NSArray{
-            let avgtemp = (array[indexPath.row]) as! String
+       
+        let dictObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
+        if let dict = dictObjectTemperature as? NSDictionary{
+            let avgtemp = (dict.allValues[indexPath.row]) as! String
             vc?.temperature = avgtemp + "°"
             
             
         }
         //Weather Description
-        let arrayObjectWeather =  UserDefaults.standard.object(forKey: "WeatherDescription")
+        let dictObjectWeather =  UserDefaults.standard.object(forKey: "WeatherDescription")
 
-        if let array = arrayObjectWeather as? NSArray{
-            weatherDescription = (array[indexPath.row]) as! String
+        if let dict = dictObjectWeather as? NSDictionary{
+            weatherDescription = (dict.allValues[indexPath.row]) as! String
             
         }
         
         
         //Pressure
-        let arrayObjectPressure = UserDefaults.standard.object(forKey: "Pressure")
-        if let array = arrayObjectPressure as? NSArray{
-            pressure = (array[indexPath.row]) as! String
+        let dictObjectPressure = UserDefaults.standard.object(forKey: "Pressure")
+        if let dict = dictObjectPressure as? NSDictionary{
+            pressure = (dict.allValues[indexPath.row]) as! String
             
         }
         //Humidity
-        let arrayObjectHumidity = UserDefaults.standard.object(forKey: "Humidity")
-        if let array = arrayObjectHumidity as? NSArray{
-            humidity = (array[indexPath.row]) as! String
+        let dictObjectHumidity = UserDefaults.standard.object(forKey: "Humidity")
+        if let dict = dictObjectHumidity as? NSDictionary{
+            humidity = (dict.allValues[indexPath.row]) as! String
             
         }
         //visibility
         
         
-        let arrayObjectVisibility = UserDefaults.standard.object(forKey: "Visibility")
-        if let array = arrayObjectVisibility as? NSArray{
-            visibility = (array[indexPath.row]) as! String
+        let dictObjectVisibility = UserDefaults.standard.object(forKey: "Visibility")
+        if let dict = dictObjectVisibility as? NSDictionary{
+            visibility = (dict.allValues[indexPath.row]) as! String
         }
         
         
         
         //minimum temperature
-        let arrayObjectMinTemp = UserDefaults.standard.object(forKey: "MinTemp")
-        if let array = arrayObjectMinTemp as? NSArray{
-            minimumTemp = (array[indexPath.row]) as! String
+        let dictObjectMinTemp = UserDefaults.standard.object(forKey: "MinTemp")
+        if let dict = dictObjectMinTemp as? NSDictionary{
+            minimumTemp = (dict.allValues[indexPath.row]) as! String
         }
         //maximum temperature
-        let arrayObjectMaxTemp = UserDefaults.standard.object(forKey: "MaxTemp")
-        if let array = arrayObjectMaxTemp as? NSArray{
-            maximumTemp = (array[indexPath.row]) as! String
+        let dictObjectMaxTemp = UserDefaults.standard.object(forKey: "MaxTemp")
+        if let dict = dictObjectMaxTemp as? NSDictionary{
+            maximumTemp = (dict.allValues[indexPath.row]) as! String
         }
         //sunrise
         
-        let arrayObjectSunrise = UserDefaults.standard.object(forKey: "Sunrise")
-        if let array = arrayObjectSunrise as? NSArray{
-            sunrise = (array[indexPath.row]) as! String
+        let dictObjectSunrise = UserDefaults.standard.object(forKey: "Sunrise")
+        if let dict = dictObjectSunrise as? NSDictionary{
+            sunrise = (dict.allValues[indexPath.row]) as! String
           
         }
         
         //sunset
         
-        let arrayObjectSunset = UserDefaults.standard.object(forKey: "Sunset")
-        if let array = arrayObjectSunset as? NSArray{
-            sunset = (array[indexPath.row]) as! String
+        let dictObjectSunset = UserDefaults.standard.object(forKey: "Sunset")
+        if let dict = dictObjectSunset as? NSDictionary{
+            sunset = (dict.allValues[indexPath.row]) as! String
          
         }
         
         
         //windspeed
-        let arrayObjectWindSpeed = UserDefaults.standard.object(forKey: "WindSpeed")
-        if let array = arrayObjectWindSpeed as? NSArray{
+        let dictObjectWindSpeed = UserDefaults.standard.object(forKey: "WindSpeed")
+        if let dict = dictObjectWindSpeed as? NSDictionary{
             
-            windSpeed = (array[indexPath.row]) as! String
+            windSpeed = (dict.allValues[indexPath.row]) as! String
    
         }
         
-        let arrayObjectWindDegree = UserDefaults.standard.object(forKey: "WindDegree")
-        if let array = arrayObjectWindDegree as? NSArray{
+        let dictObjectWindDegree = UserDefaults.standard.object(forKey: "WindDegree")
+        if let dict = dictObjectWindDegree as? NSDictionary{
             
-            windDegree = (array[indexPath.row]) as! String
+            windDegree = (dict.allValues[indexPath.row]) as! String
             
         }
         
         //cloud
         
-        let arrayObjectCloud = UserDefaults.standard.object(forKey: "Cloud")
-        if let array = arrayObjectCloud as? NSArray{
+        let dictObjectCloud = UserDefaults.standard.object(forKey: "Cloud")
+        if let dict = dictObjectCloud as? NSDictionary{
             
-            cloud = (array[indexPath.row]) as! String
+            cloud = (dict.allValues[indexPath.row]) as! String
             print(cloud)
         }
         
+        
+        //Passing all the values to the detailed view controller
         vc?.pressure = pressure
         vc?.humidity = humidity
         vc?.visibility = visibility
@@ -204,6 +234,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc?.cloud = cloud
         vc?.weatherDescription = weatherDescription
         
+        //displaying detailed view controller
         self.present(vc!, animated: true, completion: nil)
         
         
@@ -211,7 +242,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
   
-    
     
 }
 
