@@ -13,6 +13,7 @@
 		D217D190221BB1E6009EAA67 /* SVProgressHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D217D18C221BB18A009EAA67 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2458C112211074D00661394 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2458C102211074D00661394 /* background.jpg */; };
 		D2458C22221300F700661394 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2458C21221300F700661394 /* TableViewCell.swift */; };
+		D2466BA22224488500855933 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2466BA12224488500855933 /* WeatherInfo.swift */; };
 		D25270452221037D00C2BB5B /* citycodeList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D25270442221037D00C2BB5B /* citycodeList.txt */; };
 		D269FE17221AADAD004AE9D2 /* frame_122_delay-0.07s.gif in Resources */ = {isa = PBXBuildFile; fileRef = D269FD50221AAC69004AE9D2 /* frame_122_delay-0.07s.gif */; };
 		D269FE18221AADAD004AE9D2 /* frame_041_delay-0.07s.gif in Resources */ = {isa = PBXBuildFile; fileRef = D269FD51221AAC6A004AE9D2 /* frame_041_delay-0.07s.gif */; };
@@ -244,6 +245,7 @@
 		D217D18C221BB18A009EAA67 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SVProgressHUD.framework; sourceTree = "<group>"; };
 		D2458C102211074D00661394 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		D2458C21221300F700661394 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		D2466BA12224488500855933 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		D25270442221037D00C2BB5B /* citycodeList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = citycodeList.txt; path = "Coding Assignment Weather App/citycodeList.txt"; sourceTree = SOURCE_ROOT; };
 		D269FD50221AAC69004AE9D2 /* frame_122_delay-0.07s.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "frame_122_delay-0.07s.gif"; sourceTree = "<group>"; };
 		D269FD51221AAC6A004AE9D2 /* frame_041_delay-0.07s.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "frame_041_delay-0.07s.gif"; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 				D29C46B5222162140046747D /* RetrievingData.swift */,
 				D29C46B82221647C0046747D /* TimeStampConverter.swift */,
 				D217D18A221BB17B009EAA67 /* PDGlobal.swift */,
+				D2466BA12224488500855933 /* WeatherInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				D2458C22221300F700661394 /* TableViewCell.swift in Sources */,
 				D2883F56221105A000979B0C /* ViewController.swift in Sources */,
 				D29C46B92221647C0046747D /* TimeStampConverter.swift in Sources */,
+				D2466BA22224488500855933 /* WeatherInfo.swift in Sources */,
 				D2B11D552217E34700ED882F /* DetailedViewController.swift in Sources */,
 				D217D162221AF411009EAA67 /* DetailedVCTableViewCell.swift in Sources */,
 				D2883F54221105A000979B0C /* AppDelegate.swift in Sources */,

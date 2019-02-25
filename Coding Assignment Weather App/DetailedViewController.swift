@@ -15,7 +15,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
    //Initialising Variable
     var timer = Timer()
     var i = 1 //required for func processTimer 
-    var citytext = "",
+    var cityName = "",
     temperature = "",
     humidity = "",
     sunrise = "",
@@ -48,7 +48,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         
-        city.text = citytext
+        city.text = cityName
         if let today = timestampconverter.today(timeStamp: Int(sunrise)!) as? String{
             todayLabel.text = today
         }

@@ -23,11 +23,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // loading for some feedback to user while waiting for network response
+      
+
+        
     }
     override func viewDidAppear(_ animated: Bool) {
       
-        
-        // loading for some feedback to user while waiting for network response
         networkLoading.loading(string: "Loading..")
         
         DispatchQueue.global(qos: .background).async {
@@ -43,6 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //refreshing tableview data
         self.tableView.reloadData()
+     
 
     }
     
@@ -58,6 +61,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+   
+        
+       
+       
         
         //Each cell should display two pieces of info
         let dictObject = UserDefaults.standard.object(forKey: "Temperature")
@@ -67,33 +74,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
              print(dict)
             if let city = Array(dict.allKeys)[indexPath.row] as? String{
                 cell.city.text! = city
-                
+
             }
-            
+
         else{
             cell.city.text! = "city1"
         }
         }
         else{
-            
+
             cell.city.text! = "city2"
         }
-        
+
         //2. Temperature on the right
-        
+
         if let dict = dictObject as? NSDictionary{
-           
+
             if let temp = Array(dict.allValues)[indexPath.row] as? String{
                 cell.avgTemp.text! = "\(temp)°"
-                
+
             }
-                
+
             else{
                 cell.avgTemp.text! = "temp"
             }
         }
         else{
-            
+
             cell.avgTemp.text! = "temp"
         }
         return cell
@@ -129,13 +136,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController
-        vc?.citytext = cities[indexPath.row]
+     
+        
        
         let dictObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
         if let dict = dictObjectTemperature as? NSDictionary{
             let avgtemp = (dict.allValues[indexPath.row]) as! String
             vc?.temperature = avgtemp + "°"
-            
+            vc?.cityName = (dict.allKeys[indexPath.row]) as! String
+
             
         }
         //Weather Description
@@ -222,6 +231,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         //Passing all the values to the detailed view controller
+        
         vc?.pressure = pressure
         vc?.humidity = humidity
         vc?.visibility = visibility
