@@ -12,8 +12,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     //Intialising Variables
-    var cities = ["Sydney","Brisbane","Melbourne"]
-    var temperature = [String]()
     var retrievingData: RetrievingData = RetrievingData()
     var networkLoading: NetworkLoading = NetworkLoading()
     
@@ -52,7 +50,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-       return cities.count
+        var count = 0
+        let dictObjectTemperature = UserDefaults.standard.object(forKey: "Temperature")
+        if let dict = dictObjectTemperature as? NSDictionary{
+            count = dict.allValues.count
+        }
+       return count
         
     }
     
