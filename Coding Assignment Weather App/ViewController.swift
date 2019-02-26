@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //Intialising Variables
     var retrievingData: RetrievingData = RetrievingData()
     var networkLoading: NetworkLoading = NetworkLoading()
+    var cityCodes = [4163971, 2147714, 2174003]//Melbourne //Sydney //Brisbane
     //IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
@@ -25,8 +26,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         DispatchQueue.global(qos: .background).async {
         
-      
-            self.retrievingData.retrieveData(citycode: [4163971, 2147714, 2174003]) //Melbourne //Sydney //Brisbane
+            
+            self.retrievingData.retrieveData(citycode: self.cityCodes)
          
             SVProgressHUD.dismiss()
 
