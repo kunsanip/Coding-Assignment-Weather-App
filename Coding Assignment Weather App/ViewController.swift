@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         DispatchQueue.global(qos: .background).async {
         
             
-            self.retrievingData.retrieveData(citycode: self.cityCodes)
+            self.retrievingData.retrieveData(citycode: [4163971, 2147714, 2174003])
          
             SVProgressHUD.dismiss()
 
@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let decoded = userDefaults.object(forKey: "weatherInfo") as! Data
         let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [WeatherInfo]
         cell.city.text = decodedTeams[indexPath.row].cityName
-        cell.avgTemp.text = decodedTeams[indexPath.row].cityTemp
+        cell.avgTemp.text = decodedTeams[indexPath.row].cityTemp + "°"
         
         
         return cell
