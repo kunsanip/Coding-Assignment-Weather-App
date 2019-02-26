@@ -53,7 +53,7 @@ class DetailedViewController: UIViewController, UITableViewDelegate, UITableView
             todayLabel.text = today
         }
         weatherCondition.text = weatherDescription
-        averageTemp.text = temperature
+        averageTemp.text = temperature + "°"
         temperatureLabel.text = "\(tempMax)    \(tempMin)"
         weatherDescripitionLabel.text = "Today: \(weatherDescription) currently. The high will be \(tempMax)° and a low will be \(tempMin)°."
         
