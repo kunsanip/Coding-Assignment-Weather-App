@@ -15,7 +15,7 @@ public class TimeStampConverter{
     func timeStampConvert(timeStamp:Int) -> String{
         let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "DMT") //Set timezone that you want
+        dateFormatter.timeZone = TimeZone(abbreviation: "AEST") //Set timezone that you want
         dateFormatter.locale = NSLocale.current
         dateFormatter.dateFormat = "HH:mm" //Specify your format that you want
         return dateFormatter.string(from: date)
