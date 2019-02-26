@@ -9,6 +9,7 @@
 import Foundation
 
 class WeatherInfo: NSObject, NSCoding {
+    var cityName : String
     var cityTemp : String
     var cityPressure : String
     var cityHumidity : String
@@ -23,9 +24,9 @@ class WeatherInfo: NSObject, NSCoding {
     var cityWeatherDescription : String
     
     
-    
-    init(cityTemp : String, cityPressure : String, cityHumidity : String,cityVisibility : String,cityMinTemp : String,cityMaxTemp : String, citySunrise : String, citySunset : String, cityWindSpeed : String, cityWindDegree : String, cityCloud : String, cityWeatherDescription : String){
-        
+  
+    init(cityName: String, cityTemp : String, cityPressure : String, cityHumidity : String, cityVisibility : String,cityMinTemp : String,cityMaxTemp : String, citySunrise : String, citySunset : String, cityWindSpeed : String, cityWindDegree : String, cityCloud : String, cityWeatherDescription : String){
+        self.cityName = cityName
         self.cityTemp = cityTemp
         self.cityPressure = cityPressure
         self.cityHumidity = cityHumidity
@@ -43,7 +44,7 @@ class WeatherInfo: NSObject, NSCoding {
     
     
     required convenience init(coder aDecoder: NSCoder) {
-        
+        let cityName = aDecoder.decodeObject(forKey: "cityName") as! String
         let cityTemp = aDecoder.decodeObject(forKey: "cityTemp") as! String
         let cityPressure = aDecoder.decodeObject(forKey: "cityPressure") as! String
         let cityHumidity = aDecoder.decodeObject(forKey: "cityHumidity") as! String
@@ -56,11 +57,13 @@ class WeatherInfo: NSObject, NSCoding {
         let cityWindDegree = aDecoder.decodeObject(forKey:"cityWindDegree") as! String
         let cityCloud = aDecoder.decodeObject(forKey:"cityCloud") as! String
         let cityWeatherDescription = aDecoder.decodeObject(forKey:"cityWeatherDescription") as! String
+
         
-        self.init(cityTemp: cityTemp, cityPressure: cityPressure, cityHumidity: cityHumidity, cityVisibility: cityVisibility, cityMinTemp: cityMinTemp, cityMaxTemp: cityMaxTemp, citySunrise: citySunrise, citySunset: citySunset, cityWindSpeed: cityWindSpeed, cityWindDegree: cityWindDegree, cityCloud: cityCloud, cityWeatherDescription: cityWeatherDescription)
+        self.init(cityName: cityName, cityTemp: cityTemp, cityPressure: cityPressure, cityHumidity: cityHumidity, cityVisibility: cityVisibility, cityMinTemp: cityMinTemp, cityMaxTemp: cityMaxTemp, citySunrise: citySunrise, citySunset: citySunset, cityWindSpeed: cityWindSpeed, cityWindDegree: cityWindDegree, cityCloud: cityCloud, cityWeatherDescription: cityWeatherDescription)
     }
     
     func encode(with aCoder: NSCoder) {
+        aCoder.encode(cityName, forKey: "cityName")
         aCoder.encode(cityTemp, forKey: "cityTemp")
         aCoder.encode(cityPressure, forKey: "cityPressure")
         aCoder.encode(cityHumidity, forKey: "cityHumidity")
@@ -77,3 +80,4 @@ class WeatherInfo: NSObject, NSCoding {
         
     }
 }
+

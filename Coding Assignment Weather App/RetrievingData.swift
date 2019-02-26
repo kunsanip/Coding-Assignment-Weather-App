@@ -25,40 +25,13 @@ class RetrievingData{
     var cityCloud = [String:String]()
     var cityWeatherDescription = [String:String]()
     
-    
+    var weatherInfo = [WeatherInfo]()
     var networkLoading: NetworkLoading = NetworkLoading()
 
-    func retrieveData(citycode:Int){
+    func retrieveData(citycode:[Int]){
         
-//        UserDefaults.standard.removeObject(forKey: "Temperature")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Pressure")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Humidity")
-//        
-//        UserDefaults.standard.removeObject(forKey: "MinTemp")
-//        
-//        UserDefaults.standard.removeObject(forKey: "MaxTemp")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Visibility")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Sunrise")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Sunset")
-//        
-//        UserDefaults.standard.removeObject(forKey: "WindSpeed")
-//        
-//        UserDefaults.standard.removeObject(forKey: "WindDegree")
-//        
-//        UserDefaults.standard.removeObject(forKey: "Cloud")
-//        
-//        UserDefaults.standard.removeObject(forKey:"WeatherDescription")
-        // loading for some feedback to user while waiting for network response
-        networkLoading.loading(string: "Loading..")
-        
-        DispatchQueue.global(qos: .background).async {
-        
-        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=\(citycode)&units=metric&APPID=04ce859d9a8b9bdffe4cb50cf94b2633"){
+        for code in citycode{
+            if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=\(code)&units=metric&APPID=04ce859d9a8b9bdffe4cb50cf94b2633"){
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in //
                 
                 if error != nil {
@@ -71,6 +44,7 @@ class RetrievingData{
                         
                         
                         do {
+                            var cityName = ""
                             var cityTemp = ""
                             var cityPressure = ""
                             var cityHumidity = ""
@@ -84,15 +58,15 @@ class RetrievingData{
                             var cityCloud = ""
                             var cityWeatherDescription = ""
                             let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-                            var cityName = ""
-                            if let name = (jsonResult["name"] as? String){
                             
+                            if let name = (jsonResult["name"] as? String){
+                                
                                 cityName = name
-                             }
+                            }
                             if let main = (jsonResult["main"] as? NSDictionary){
                                 
                                 let temperature = String(describing: main["temp"] as! NSNumber)
-                               
+                                
                                 self.cityTemp[cityName] = temperature
                                 
                                 //
@@ -107,9 +81,9 @@ class RetrievingData{
                                 //pressure
                                 let pressure = String(describing: main["pressure"] as! NSNumber)
                                 
-                                 self.cityPressure[cityName] = pressure
+                                self.cityPressure[cityName] = pressure
                                 
-                                    cityPressure = pressure
+                                cityPressure = pressure
                                 UserDefaults.standard.set(self.cityPressure, forKey: "Pressure")
                                 
                                 //humidity
@@ -117,8 +91,8 @@ class RetrievingData{
                                 
                                 self.cityHumidity[cityName] = humidity
                                 cityHumidity = humidity
-
-                               
+                                
+                                
                                 UserDefaults.standard.set(self.cityHumidity, forKey: "Humidity")
                                 
                                 //minimum temperature
@@ -126,8 +100,8 @@ class RetrievingData{
                                 
                                 self.cityMinTemp[cityName] = minTemp
                                 cityMinTemp = minTemp
-
-                               
+                                
+                                
                                 UserDefaults.standard.set(self.cityMinTemp, forKey: "MinTemp")
                                 
                                 //maximum temperature
@@ -135,7 +109,7 @@ class RetrievingData{
                                 
                                 self.cityMaxTemp[cityName] = maxTemp
                                 cityMaxTemp = maxTemp
-
+                                
                                 
                                 UserDefaults.standard.set(self.cityMaxTemp, forKey: "MaxTemp")
                                 
@@ -190,9 +164,9 @@ class RetrievingData{
                                 
                                 //wind Degree
                                 if (main["deg"] as? NSNumber) != nil{
-                                let windDegree = String(describing: main["deg"] as! NSNumber)
+                                    let windDegree = String(describing: main["deg"] as! NSNumber)
                                     self.cityWindDegree[cityName] = windDegree
-                               cityWindDegree = windDegree
+                                    cityWindDegree = windDegree
                                     UserDefaults.standard.set(self.cityWindDegree, forKey: "WindDegree")
                                 }}
                             //cloud
@@ -220,24 +194,21 @@ class RetrievingData{
                             }
                             
                             
-//                            let weatherInfo = [WeatherInfo]()
-//                            let weatherObject = WeatherInfo(cityTemp: cityTemp, cityPressure: cityPressure, cityHumidity: cityHumidity, cityVisibility: cityVisibility, cityMinTemp: cityMinTemp, cityMaxTemp: cityMaxTemp, citySunrise: citySunrise, citySunset: citySunset, cityWindSpeed: cityWindSpeed, cityWindDegree: cityWindDegree, cityCloud: cityCloud, cityWeatherDescription: cityWeatherDescription)
-//                            
-//                            let weatherInfo1 = [WeatherInfo(cityTemp: "21", cityPressure: "21", cityHumidity: "21", cityVisibility: "21", cityMinTemp: "21", cityMaxTemp: "21", citySunrise: "21", citySunset: "21", cityWindSpeed: "21", cityWindDegree: "21", cityCloud: "21", cityWeatherDescription: "21"),WeatherInfo(cityTemp: "weatherinformation", cityPressure: "weatherinformation", cityHumidity: "weatherinformation", cityVisibility: "weatherinformation", cityMinTemp: "weatherinformation", cityMaxTemp: "weatherinformation", citySunrise: "weatherinformation", citySunset: "weatherinformation", cityWindSpeed: "weatherinformation", cityWindDegree: "weatherinformation", cityCloud: "weatherinformation", cityWeatherDescription: "weatherinformation")]
-//                            
-//                            var userDefaults = UserDefaults.standard
-//                            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: weatherInfo)
-//                            userDefaults.set(encodedData, forKey: "weatherInfo1")
-//                            userDefaults.synchronize()
-//                            
-//                            let decoded  =  userDefaults.object(forKey: "weatherInfo1") as! Data
-//                            let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [WeatherInfo]
-//                            for dec in decodedTeams{
-//                                print(dec.cityCloud)
-//                            }
-                                
+                            let weatherInfoObject = WeatherInfo(cityName:cityName, cityTemp: cityTemp, cityPressure: cityPressure, cityHumidity: cityHumidity, cityVisibility: cityVisibility, cityMinTemp: cityMinTemp, cityMaxTemp: cityMaxTemp, citySunrise: citySunrise, citySunset: citySunset, cityWindSpeed: cityWindSpeed, cityWindDegree: cityWindDegree, cityCloud: cityCloud, cityWeatherDescription: cityWeatherDescription)
+                            self.weatherInfo.append(weatherInfoObject)
+                            let userDefaults = UserDefaults.standard
+                            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self.weatherInfo)
+                            userDefaults.set(encodedData, forKey: "weatherInfo")
+                            userDefaults.synchronize()
                             
-                            
+                            //                            let decoded  =  userDefaults.object(forKey: "weatherInfo") as! Data
+                            //                            let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [WeatherInfo]
+                            //                            for dec in decodedTeams{
+                            //                                print(dec.cityWeatherDescription)
+                            //                            }
+                            //
+                            //
+                            //
                             
                             
                             
@@ -245,6 +216,10 @@ class RetrievingData{
                             print("JSON Processing Failed")
                             
                         }
+                        
+                        
+                        
+                        
                     }
                     
                 }
@@ -253,11 +228,11 @@ class RetrievingData{
             task.resume()
             
             }
-            SVProgressHUD.dismiss()
             
         }
         
-        
-        
     }
+       
+        
+    
 }

@@ -224,12 +224,13 @@
 		D29C46B6222162140046747D /* RetrievingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C46B5222162140046747D /* RetrievingData.swift */; };
 		D29C46B92221647C0046747D /* TimeStampConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C46B82221647C0046747D /* TimeStampConverter.swift */; };
 		D2B11D552217E34700ED882F /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B11D542217E34700ED882F /* DetailedViewController.swift */; };
+		D2D0BD662224AF5D005094A9 /* PDExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0BD652224AF5D005094A9 /* PDExtentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D217D18F221BB1DB009EAA67 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -458,6 +459,7 @@
 		D29C46B5222162140046747D /* RetrievingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievingData.swift; sourceTree = "<group>"; };
 		D29C46B82221647C0046747D /* TimeStampConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStampConverter.swift; sourceTree = "<group>"; };
 		D2B11D542217E34700ED882F /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		D2D0BD652224AF5D005094A9 /* PDExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDExtentions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,6 +751,7 @@
 				D29C46B82221647C0046747D /* TimeStampConverter.swift */,
 				D217D18A221BB17B009EAA67 /* PDGlobal.swift */,
 				D2466BA12224488500855933 /* WeatherInfo.swift */,
+				D2D0BD652224AF5D005094A9 /* PDExtentions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				D2466BA22224488500855933 /* WeatherInfo.swift in Sources */,
 				D2B11D552217E34700ED882F /* DetailedViewController.swift in Sources */,
 				D217D162221AF411009EAA67 /* DetailedVCTableViewCell.swift in Sources */,
+				D2D0BD662224AF5D005094A9 /* PDExtentions.swift in Sources */,
 				D2883F54221105A000979B0C /* AppDelegate.swift in Sources */,
 				D29C46B42221214A0046747D /* AddCities.swift in Sources */,
 				D217D18B221BB17B009EAA67 /* PDGlobal.swift in Sources */,
@@ -1194,6 +1198,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coding\\ Assignment\\ Weather\\ App",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Coding Assignment Weather App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -1217,6 +1222,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coding\\ Assignment\\ Weather\\ App",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Coding Assignment Weather App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
