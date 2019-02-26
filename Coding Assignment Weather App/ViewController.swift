@@ -101,6 +101,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc?.pressure = decodedWeatherInfo[indexPath.row].cityPressure
         vc?.humidity = decodedWeatherInfo[indexPath.row].cityHumidity
         vc?.visibility = decodedWeatherInfo[indexPath.row].cityVisibility
+        vc?.temperature = decodedWeatherInfo[indexPath.row].cityTemp
         vc?.tempMin = decodedWeatherInfo[indexPath.row].cityMinTemp
         vc?.tempMax = decodedWeatherInfo[indexPath.row].cityMaxTemp
         vc?.sunrise = decodedWeatherInfo[indexPath.row].citySunrise
